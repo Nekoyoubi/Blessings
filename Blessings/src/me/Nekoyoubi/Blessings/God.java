@@ -1,5 +1,6 @@
 package me.Nekoyoubi.Blessings;
 
+
 import java.util.List;
 import java.util.Random;
 
@@ -12,30 +13,29 @@ public abstract class God {
 	public String displayName;
 	public List<Material> shrineBases;
 	public List<Favor> favors;
-	private String msgGiven;
-	private String msgDisappoint;
-	private String msgNull;
-	private String msgSharePlayer;
-	private String msgShareWorld;
+	protected String msgGiven;
+	protected String msgDisappoint;
+	protected String msgNull;
+	//private String msgSharePlayer;
+	//private String msgShareWorld;
 	public String colorName() { return colorCode + displayName + "&f"; }
 	public void offer(Player player, Block shrine) {
 		int level = player.getLevel();
-		//int remaining = player.getTotalExperience();
-		if (level<5) {
-			// TODO Handle gods being disappoint. ;)
-			Nekoyoubi.sendMessage(player, msgDisappoint);
-		}
-		if (level > 1) {
+		if (level > 0) {
 			Random rando = new Random();
 			for (Favor favor : this.favors) {
-				if (favor.chance * level > (rando.nextInt(1000)+1))
+				int test = rando.nextInt(1000)+1;
+				int modchance = favor.chance * (level*(level/2));
+				Nekoyoubi.sendMessage(player, favor.action+" "+favor.data+" / ("+favor.chance+"*"+level+" = "+modchance+") > "+test);
+				if (test < modchance) {
 					favor.process(player, shrine);
+				}
+				
 			}
 			player.setLevel(0);
 			player.setExperience(0);
-			// TODO Investigate this guy to see if he's statistical or practical.
-			// player.setTotalExperience(0);
-			Nekoyoubi.sendMessage(player, msgGiven);
+			player.setTotalExperience(0);
+			Nekoyoubi.sendMessage(player, (level < 3) ? msgDisappoint : msgGiven);
 		} else {
 			Nekoyoubi.sendMessage(player, msgNull);
 		}

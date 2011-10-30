@@ -51,13 +51,13 @@ public class Favor {
 	public void process(Player player, Block shrine) {
 		// Determine targets and establish the list of players to effect.
 		ArrayList<Player> effectTargets = getTargets(player);
-		
+		Nekoyoubi.sendMessage(player, "Processing: "+action+" "+targets+" "+data);
 		if (action == "give") {
 			ArrayList<ItemStack> items = new ArrayList<ItemStack>();
 			for (String i : this.data.split(";")) {
 				if (i.matches("^\\d+$")) { // Give an item.
 					// e.g. "35" == A single piece of plain white wool.
-					items.add(new ItemStack(Integer.parseInt(i)));
+					items.add(new ItemStack(Integer.parseInt(i), 1));
 				} else if (i.matches("^\\d+x\\d+$")) { // Give a quantity of an item.
 					// e.g. "35x5" == Five pieces of plain white wool.
 					items.add(new ItemStack(
@@ -68,7 +68,7 @@ public class Favor {
 					items.add(new ItemStack(
 							Integer.parseInt(i.split(":")[0]),
 							1,
-							Short.parseShort(i.split(":")[0])));
+							Short.parseShort(i.split(":")[1])));
 				} else if (i.matches("^\\d+\\:\\d+x\\d+$")) { // Give a quantity of an item with data.
 					// e.g. "35:10x5" == Five pieces of purple wool.
 					items.add(new ItemStack(
@@ -81,6 +81,7 @@ public class Favor {
 			for (Player target : effectTargets) {
 				for (ItemStack itemStack : items) {
 					target.getInventory().addItem(itemStack);
+					target.updateInventory();
 				}
 			}
 		} else if (action == "spawn") {

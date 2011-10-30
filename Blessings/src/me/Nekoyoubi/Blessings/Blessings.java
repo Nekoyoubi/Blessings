@@ -9,8 +9,8 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 public class Blessings extends JavaPlugin {
 
-    private PlayerListener playerListener = new BlessingsPlayerListener();
-    private BlockListener blockListener = new BlessingsBlockListener();
+    private final PlayerListener playerListener = new BlessingsPlayerListener();
+    private final BlockListener blockListener = new BlessingsBlockListener();
 
 	@Override
 	public void onDisable() {
@@ -22,7 +22,7 @@ public class Blessings extends JavaPlugin {
         PluginManager pm = getServer().getPluginManager();
         pm.registerEvent(Type.BLOCK_PLACE, blockListener, Priority.Low, this);
         pm.registerEvent(Type.PLAYER_INTERACT, playerListener, Priority.Low, this);
+        //pm.registerEvent(Type.PLAYER_LOGIN, playerListener, Priority.Low, this);
 		System.out.println(this + " is now enabled.");
 	}
-
 }

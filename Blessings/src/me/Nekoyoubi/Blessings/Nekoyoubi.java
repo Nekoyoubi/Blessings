@@ -9,7 +9,9 @@ import org.bukkit.entity.Player;
 public class Nekoyoubi {
     private static String chatStart = ChatColor.GOLD + "Blessings" + ChatColor.WHITE + ": ";
     public static void sendMessage(Player player, String message){
-        player.sendMessage(chatStart+message.replaceAll("(&([a-f0-9]))", "\u00A7$2"));
+        player.sendMessage(chatStart+message
+        		.replaceAll("(&([a-f0-9]))", "\u00A7$2")
+        		.replaceAll("%WORLD%", titleCase(player.getWorld().getName())));
     }
 	public static Player randomPlayerInWorld(World world) {
 		if (world.getPlayers().size() > 0) {
@@ -19,4 +21,12 @@ public class Nekoyoubi {
 		}
 	}
 
+	public static String titleCase(String text){
+        String result = "";
+        for (int i = 0; i < text.length(); i++){
+            String next = text.substring(i, i + 1);
+            result += (i == 0) ? next.toUpperCase() : next.toLowerCase();
+        }
+        return result;
+    }
 }
