@@ -5,7 +5,7 @@ import java.util.ArrayList;
 
 import me.Nekoyoubi.Blessings.Gods.Ares;
 //import me.Nekoyoubi.Blessings.Gods.Athena;
-//import me.Nekoyoubi.Blessings.Gods.Gaia;
+import me.Nekoyoubi.Blessings.Gods.Gaia;
 //import me.Nekoyoubi.Blessings.Gods.Hades;
 //import me.Nekoyoubi.Blessings.Gods.Zeus;
 
@@ -44,7 +44,7 @@ public class BlessingsPlayerListener extends PlayerListener {
             ArrayList<God> gods = new ArrayList<God>();
             gods.add(new Ares());
             //gods.add(new Athena());
-            //gods.add(new Gaia());
+            gods.add(new Gaia());
             //gods.add(new Hades());
             //gods.add(new Zeus());
             for (God god : gods) {

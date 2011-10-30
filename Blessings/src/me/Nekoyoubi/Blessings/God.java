@@ -25,8 +25,8 @@ public abstract class God {
 			Random rando = new Random();
 			for (Favor favor : this.favors) {
 				int test = rando.nextInt(1000)+1;
-				int modchance = favor.chance * (level*(level/2));
-				Nekoyoubi.sendMessage(player, favor.action+" "+favor.data+" / ("+favor.chance+"*"+level+" = "+modchance+") > "+test);
+				int modchance = favor.chance * (level*((level/2)+1));
+				//Nekoyoubi.sendMessage(player, favor.action+" "+favor.data+" / ("+favor.chance+"*"+level+" = "+modchance+") > "+test);
 				if (test < modchance) {
 					favor.process(player, shrine);
 				}
