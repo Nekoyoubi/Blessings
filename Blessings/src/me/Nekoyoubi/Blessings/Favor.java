@@ -17,9 +17,10 @@ public class Favor {
 	 */
 	public Integer cost;
 	
-	public Favor(Integer cost, String action, String data, String flavor) {
+	public Favor(Integer cost, String action, String targets, String data, String flavor) {
 		this.cost = cost;
 		this.action = action;
+		this.targets = targets;
 		this.data = data;
 		this.flavor = flavor;
 	}
@@ -35,24 +36,39 @@ public class Favor {
 			} else if (t == "world") {
 				effectTargets.addAll(player.getWorld().getPlayers());
 			} else if (t == "server") {
-				// TODO Think long and hard about this one... spells horribad.
+				// TODO Think long and hard about this one... smells horribad.
 			}
 		}
 		
 		if (action == "give") {
 			ArrayList<ItemStack> items = new ArrayList<ItemStack>();
 			for (String i : this.data.split(";")) {
-				if (i.matches("^\\d+$")) {
+				if (i.matches("^\\d+$")) { // Give an item.
+					// e.g. "35" == A single piece of plain white wool.
 					items.add(new ItemStack(Integer.parseInt(i)));
-				} else if (i.matches("^\\d+\\,\\d+$")) {
+				} else if (i.matches("^\\d+x\\d+$")) { // Give a quantity of an item.
+					// e.g. "35x5" == Five pieces of plain white wool.
 					items.add(new ItemStack(
-							Integer.parseInt(i.split(",")[0]),
-							Integer.parseInt(i.split(",")[1])));
-				} else if (i.matches("^\\d+\\,\\d+\\:\\d$")) {
+							Integer.parseInt(i.split("x")[0]),
+							Integer.parseInt(i.split("x")[1])));
+				} else if (i.matches("^\\d+:\\d+$")) { // Give one of an item with data.
+					// e.g. "35:10" == A single piece of purple wool.
 					items.add(new ItemStack(
-							Integer.parseInt(i.split(",")[0]),
-							Integer.parseInt(i.split(",")[1].split(":")[0]),
-							Short.parseShort(i.split(",")[1].split(":")[1])));
+							Integer.parseInt(i.split(":")[0]),
+							1,
+							Short.parseShort(i.split(":")[0])));
+				} else if (i.matches("^\\d+\\:\\d+x\\d+$")) { // Give a quantity of an item with data.
+					// e.g. "35:10x5" == Five pieces of purple wool.
+					items.add(new ItemStack(
+							Integer.parseInt(i.split("x")[0].split(":")[0]),
+							Integer.parseInt(i.split("x")[1]),
+							Short.parseShort(i.split("x")[0].split(":")[1])));
+				}
+			}
+		
+			for (Player target : effectTargets) {
+				for (ItemStack itemStack : items) {
+					target.getInventory().addItem(itemStack);
 				}
 			}
 		} else if (action == "spawn") {
