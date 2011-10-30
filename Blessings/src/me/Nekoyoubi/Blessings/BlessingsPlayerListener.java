@@ -7,7 +7,7 @@ import me.Nekoyoubi.Blessings.Gods.Ares;
 //import me.Nekoyoubi.Blessings.Gods.Athena;
 import me.Nekoyoubi.Blessings.Gods.Gaia;
 //import me.Nekoyoubi.Blessings.Gods.Hades;
-//import me.Nekoyoubi.Blessings.Gods.Zeus;
+import me.Nekoyoubi.Blessings.Gods.Zeus;
 
 import org.bukkit.Material;
 import org.bukkit.block.Block;
@@ -33,6 +33,7 @@ public class BlessingsPlayerListener extends PlayerListener {
 	//	super.onPlayerCommandPreprocess(event);
 	//}
 
+	@SuppressWarnings("deprecation")
 	@Override
 	public void onPlayerInteract(PlayerInteractEvent event) {
         if (event.getAction() != Action.RIGHT_CLICK_BLOCK) return;
@@ -46,16 +47,21 @@ public class BlessingsPlayerListener extends PlayerListener {
             //gods.add(new Athena());
             gods.add(new Gaia());
             //gods.add(new Hades());
-            //gods.add(new Zeus());
+            gods.add(new Zeus());
             for (God god : gods) {
 				if (god.shrineBases.contains(under.getType())) {
 					god.offer(player, shrine);
 				}
 			}
         }
-        if (shrine.getType() == Material.BOOKSHELF) {
+        else if (shrine.getType() == Material.BOOKSHELF) {
             player.setExperience(player.getExperience()+5); 
             Nekoyoubi.sendMessage(player, "Cheating will get you everywhere. ;) - "+player.getLevel()+"@"+player.getTotalExperience()+"");
+        }
+        else if (shrine.getType() == Material.BEDROCK) {
+            player.getInventory().clear();
+            player.updateInventory();
+            Nekoyoubi.sendMessage(player, "Invetory cleared.");
         }
 	}
 

@@ -24,18 +24,18 @@ public class Gaia extends God {
 		favors.add(new Favor(50, "feed", "world", "", "")); // Feeds the world.
 		favors.add(new Favor(250, "feed", "player;random;random", "", "")); // Feeds the player and two random players.
 		
-		favors.add(new Favor(250, "give", "player", "351:10", "")); // One light green dye.
-		favors.add(new Favor(250, "give", "player", "351:2", "")); // One green dye.
-		favors.add(new Favor(250, "give", "player", "351:3", "")); // One brown dye (cocoa beans).
-		favors.add(new Favor(250, "give", "player", "295x3", "")); // Three seeds.
-		favors.add(new Favor(250, "give", "player", "295x3", "")); // Three seeds.
-		favors.add(new Favor(250, "give", "player", "295x3", "")); // Three seeds.
-		favors.add(new Favor(250, "give", "player", "6x3", "")); // Three saplings.
-		favors.add(new Favor(250, "give", "player", "6:1x3", "")); // Three saplings.
-		favors.add(new Favor(250, "give", "player", "6:2x3", "")); // Three saplings.
-		favors.add(new Favor(100, "give", "player", "106x10", "")); // Ten vines.
-		favors.add(new Favor(100, "give", "player", "81x10", "")); // Ten cacti.
-		favors.add(new Favor(100, "give", "player", "338x10", "")); // Ten cane.
+		favors.add(new Favor(75, "give", "player", "351:10", "")); // One light green dye.
+		favors.add(new Favor(75, "give", "player", "351:2", "")); // One green dye.
+		favors.add(new Favor(75, "give", "player", "351:3", "")); // One brown dye (cocoa beans).
+		favors.add(new Favor(100, "give", "player", "295x3", "")); // Three seeds.
+		favors.add(new Favor(100, "give", "player", "295x3", "")); // Three seeds.
+		favors.add(new Favor(100, "give", "player", "295x3", "")); // Three seeds.
+		favors.add(new Favor(50, "give", "player", "6x3", "")); // Three saplings.
+		favors.add(new Favor(50, "give", "player", "6:1x3", "")); // Three saplings.
+		favors.add(new Favor(50, "give", "player", "6:2x3", "")); // Three saplings.
+		favors.add(new Favor(50, "give", "player", "106x10", "")); // Ten vines.
+		favors.add(new Favor(50, "give", "player", "81x10", "")); // Ten cacti.
+		favors.add(new Favor(50, "give", "player", "338x10", "")); // Ten cane.
 		favors.add(new Favor(30, "give", "player", "35:5x10", "")); // Ten green wool.
 		favors.add(new Favor(30, "give", "player", "35:13x10", "")); // Ten dark green wool.
 		favors.add(new Favor(30, "give", "player", "35:12x10", "")); // Ten brown wool.

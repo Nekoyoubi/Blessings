@@ -48,6 +48,7 @@ public class Favor {
 	 * @param player The player receiving the favor.
 	 * @param shrine The shrine that the player just used.
 	 */
+	@SuppressWarnings("deprecation")
 	public void process(Player player, Block shrine) {
 		// Determine targets and establish the list of players to effect.
 		ArrayList<Player> effectTargets = getTargets(player);
@@ -87,9 +88,13 @@ public class Favor {
 		} else if (action == "spawn") {
 			
 		} else if (action == "heal") {
-			
+			for (Player target : effectTargets) {
+				target.setHealth(100);
+			}		
 		} else if (action == "feed") {
-			
+			for (Player target : effectTargets) {
+				target.setFoodLevel(100);
+			}			
 		} else if (action == "hurt") {
 			
 		} else if (action == "burn") {
@@ -99,6 +104,8 @@ public class Favor {
 		} else if (action == "stormy") {
 			
 		} else if (action == "sunny") {
+			
+		} else if (action == "shock") {
 			
 		}
 	}
