@@ -8,37 +8,49 @@ import org.bukkit.inventory.ItemStack;
 
 public class Favor {
 
+	/**
+	 * Flavor text to be displayed. Only the lowest-chance favor given's text will be displayed.
+	 */
 	public String flavor;
+	/**
+	 * The action to perform (e.g. "give", "spawn", "heal", "ill", etc...).
+	 */
 	public String action;
+	/**
+	 * The data (if any) associated with the action (e.g. "14" for the RED in wool).
+	 */
 	public String data;
+	/**
+	 * The targets to be effected by the action (i.e. "player", "random", "world). Stack values with a semicolon (e.g. "player;random;random").
+	 */
 	public String targets;
 	/**
-	 * XP cost for this gift.
+	 * The chance (in 1000) that this favor will be granted.
 	 */
-	public Integer cost;
-	
-	public Favor(Integer cost, String action, String targets, String data, String flavor) {
-		this.cost = cost;
+	public Integer chance;
+	/**
+	 * Represents a unit of favor from a god. Consider it a gift or blessing.
+	 * @param chance The chance (in 1000) that the favor will be granted.
+	 * @param action The action to perform (e.g. "give", "spawn", "heal", "ill", etc...)
+	 * @param targets The targets to be effected by the action (i.e. "player", "random", "world). Stack values with a semicolon (e.g. "player;random;random").
+	 * @param data The data (if any) associated with the action (e.g. "14" for the RED in wool).
+	 * @param flavor Flavor text to be displayed. Only the lowest-chance favor given's text will be displayed.
+	 */
+	public Favor(Integer chance, String action, String targets, String data, String flavor) {
+		this.chance = chance;
 		this.action = action;
 		this.targets = targets;
 		this.data = data;
 		this.flavor = flavor;
 	}
-
+	/**
+	 * Processes a blessing's favor for a player (e.g. gives items, spawns mobs, etc...).
+	 * @param player The player receiving the favor.
+	 * @param shrine The shrine that the player just used.
+	 */
 	public void process(Player player, Block shrine) {
 		// Determine targets and establish the list of players to effect.
-		ArrayList<Player> effectTargets = new ArrayList<Player>();
-		for (String t : this.targets.split(";")) {
-			if (t == "player") {
-				effectTargets.add(player);
-			} else if (t == "random") {
-				effectTargets.add(Nekoyoubi.randomPlayerInWorld(player.getWorld()));
-			} else if (t == "world") {
-				effectTargets.addAll(player.getWorld().getPlayers());
-			} else if (t == "server") {
-				// TODO Think long and hard about this one... smells horribad.
-			}
-		}
+		ArrayList<Player> effectTargets = getTargets(player);
 		
 		if (action == "give") {
 			ArrayList<ItemStack> items = new ArrayList<ItemStack>();
@@ -88,5 +100,28 @@ public class Favor {
 		} else if (action == "sunny") {
 			
 		}
+	}
+	
+	/**
+	 * Determines the list of players to be effected by a blessing (or curse).
+	 * @param player The player instigating the blessing.
+	 * @return Returns an array of players to effect with a favor.
+	 */
+	private ArrayList<Player> getTargets(Player player) {
+		ArrayList<Player> effectTargets = new ArrayList<Player>();
+		for (String t : this.targets.split(";")) {
+			if (t == "player") {
+				effectTargets.add(player);
+			} else if (t == "random") {
+				Player rando = Nekoyoubi.randomPlayerInWorld(player.getWorld());
+				if (!effectTargets.contains(rando)) effectTargets.add(rando);
+			} else if (t == "world") {
+				effectTargets.clear();
+				effectTargets.addAll(player.getWorld().getPlayers());
+			} else if (t == "server") {
+				// TODO Think long and hard about this one... smells horribad.
+			}
+		}
+		return effectTargets;
 	}
 }

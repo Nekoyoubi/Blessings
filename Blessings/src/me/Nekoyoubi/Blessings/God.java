@@ -20,20 +20,21 @@ public abstract class God {
 	public String colorName() { return colorCode + displayName + "&f"; }
 	public void offer(Player player, Block shrine) {
 		int level = player.getLevel();
-		int remaining = player.getTotalExperience();
+		//int remaining = player.getTotalExperience();
 		if (level<5) {
 			// TODO Handle gods being disappoint. ;)
 			Nekoyoubi.sendMessage(player, msgDisappoint);
 		}
 		if (level > 1) {
 			Random rando = new Random();
-			do {
-				Favor favor = favors.get(rando.nextInt(favors.size()));
-				if (favor.cost <= remaining) {
-					remaining -= favor.cost;
+			for (Favor favor : this.favors) {
+				if (favor.chance * level > (rando.nextInt(1000)+1))
 					favor.process(player, shrine);
-				}
-			} while (remaining > 0);
+			}
+			player.setLevel(0);
+			player.setExperience(0);
+			// TODO Investigate this guy to see if he's statistical or practical.
+			// player.setTotalExperience(0);
 			Nekoyoubi.sendMessage(player, msgGiven);
 		} else {
 			Nekoyoubi.sendMessage(player, msgNull);
