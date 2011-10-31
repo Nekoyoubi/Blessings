@@ -13,7 +13,7 @@ public class Athena extends God {
 		displayName = "Athena";
 		msgGiven = colorName()+" smiles fortune upon you.";
 		msgDisappoint = colorName()+" tests your loyalty and faith.";
-		msgNull = colorName()+"is simply too busy for you now.";
+		msgNull = colorName()+" is simply too busy for you now.";
 		shrineBases = new ArrayList<Material>(2);
 		shrineBases.add(Material.BRICK);
 		shrineBases.add(Material.SMOOTH_BRICK);
