@@ -45,49 +45,24 @@ Below is a list of the gods, their purpose, and a brief list of possible blessin
 !Possible Blessings
 !Possible Curses
 |-
-|Ares  ||  God of war and violence. || Sand, Sandstone || 
-
-* Give the player weapons.
-* Give the player dogs of war.
- || 
- 
-* Set players on fire.
+|Ares  ||  God of war and violence. || Sand, Sandstone || * Give the player weapons.
+* Give the player dogs of war. || * Set players on fire.
 * Harm/kill players.
 |-
-|Athena || Goddess of wisdom, civilization, and military strategy. || Brick, Smooth Brick || 
-
-* Give the player building materials.
-* Give the player armor.
- || 
- 
-* Damage player items.
+|Athena || Goddess of wisdom, civilization, and military strategy. || Brick, Smooth Brick || * Give the player building materials.
+* Give the player armor. || * Damage player items.
 |-
-|Gaia || Goddess of the earth and all life. || Dirt, Grass || 
-
-* Spawn animals across the world.
+|Gaia || Goddess of the earth and all life. || Dirt, Grass || * Spawn animals across the world.
 * Heal and feed the world.
-* Give the player food (e.g. apples).
- || 
- 
-* Drain the health bars of players.
+* Give the player food (e.g. apples). || * Drain the health bars of players.
 * Give players fatigue.
 |-
-|Hades || God of the underworld. || Adminium (Bedrock), Obsidian || 
-
-* Give the player items from the nether.
+|Hades || God of the underworld. || Adminium (Bedrock), Obsidian || * Give the player items from the nether.
 * Give the player random Halloween-esque items (e.g. bones, web, jack-o-lanterns).
-* Give various spelunking equipment and spoils.
- || 
- 
-* Drag players down towards the underworld.
+* Give various spelunking equipment and spoils. || * Drag players down towards the underworld.
 |-
-|Zeus || God of sky and thunder. || Air || 
-
-* Give the player 'powered' items (e.g. pistons, powered rails, switches)
+|Zeus || God of sky and thunder. || Air || * Give the player 'powered' items (e.g. pistons, powered rails, switches)
 * Give the player devices (e.g. watch, compass)
-* Stop thunderstorms.
- || 
- 
-* Strike players with lightning.
+* Stop thunderstorms. || * Strike players with lightning.
 * Start thunderstorms.
 |}
