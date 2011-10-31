@@ -1,0 +1,83 @@
+== Overview ==
+Blessings is a [http://bukkit.org Bukkit] plugin currently in development by Nekoyoubi that allows Minecraft players the ability place shrines of numerous deities around the world and pay homage to their gods for various blessings.
+
+== Usage ==
+=== Shrines ===
+Shrines are created by placing a golden block. What material your golden block is placed on determines the god the shine belongs to. Upon placing a shrine, you will be notified as to what god owns the shrine.
+
+To use a shrine, simply right-click on the golden block. For each level of "faith" (your tracked, but as of yet unused levels that were introduced in 1.8), you will pay homage to the shrine's deity and gain favor.
+
+How much favor is based on the level you offer the god.
+
+=== Levels ===
+Gods do not want your zeroth (0) level. You must be at least level one (1) to use a shrine.
+
+The higher your level of faith, the better your odds of gaining the many blessings of the gods.
+
+'''Note:''' ''You can check your level by typing '''''<code>/faith</code>''''' or '''''<code>/xp</code>'''''.''
+
+=== Blessings ===
+Blessings given for your faith are randomly chosen and may effect you, someone else at random, or everyone else in your world depending on the blessing.
+
+Examples of blessings could include...
+* Giving you a diamond sword.
+* Filling your food bar.
+* Stopping a thunderstorm.
+* Healing everyone in your world.
+
+=== Curses ===
+Using a shrine with a faith less than level five (5) -- currently 4 on the server -- runs the risk of insulting and angering the gods. This is not advisable and may harm you, others in your world, or the entire world!
+
+'''Note:''' ''Curses are '''not''' guaranteed and '''do not''' negate blessings.''
+
+Examples of curses could include:
+* Set the player on fire.
+* Strike a random player with lightning.
+* Draining the food level of everyone in the world.
+
+=== Gods ===
+Below is a list of the gods, their purpose, and a brief list of possible blessings and curses they may choose to bestow upon the player or world.
+
+{| border="1" cellpadding="3" style="border-collapse:collapse"
+!Deity
+!Description
+!Shrine Base
+!Possible Blessings
+!Possible Curses
+|-
+|Ares||God of war and violence.||Sand, Sandstone||
+* Give the player weapons.
+* Give the player dogs of war.
+||
+* Set players on fire.
+* Harm/kill players.
+|-
+|Athena||Goddess of wisdom, civilization, and military strategy.||Brick, Smooth Brick||
+* Give the player building materials.
+* Give the player armor.
+||
+* Damage player items.
+|-
+|Gaia||Goddess of the earth and all life.||Dirt, Grass||
+* Spawn animals across the world.
+* Heal and feed the world.
+* Give the player food (e.g. apples).
+||
+* Drain the health bars of players.
+* Give players fatigue.
+|-
+|Hades||God of the underworld.||Adminium (Bedrock), Obsidian||
+* Give the player items from the nether.
+* Give the player random Halloween-esque items (e.g. bones, web, jack-o-lanterns).
+* Give various spelunking equipment and spoils.
+||
+* Drag players down towards the underworld.
+|-
+|Zeus||God of sky and thunder.||Air||
+* Give the player 'powered' items (e.g. pistons, powered rails, switches)
+* Give the player devices (e.g. watch, compass)
+* Stop thunderstorms.
+||
+* Strike players with lightning.
+* Start thunderstorms.
+|}
