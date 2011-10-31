@@ -1,10 +1,15 @@
 package me.Nekoyoubi.Blessings;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Random;
 
+import org.bukkit.Location;
+import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.PlayerInventory;
 
 public class Favor {
 
@@ -49,10 +54,9 @@ public class Favor {
 	 * @param shrine The shrine that the player just used.
 	 */
 	@SuppressWarnings("deprecation")
-	public void process(Player player, Block shrine) {
+	public void process(Player player, Block shrine, God god) {
 		// Determine targets and establish the list of players to effect.
 		ArrayList<Player> effectTargets = getTargets(player);
-		Nekoyoubi.sendMessage(player, "Processing: "+action+" "+targets+" "+data);
 		if (action == "give") {
 			ArrayList<ItemStack> items = new ArrayList<ItemStack>();
 			for (String i : this.data.split(";")) {
@@ -89,24 +93,112 @@ public class Favor {
 			
 		} else if (action == "heal") {
 			for (Player target : effectTargets) {
-				target.setHealth(100);
-			}		
+				target.setHealth(Integer.parseInt(this.data));
+				if (target == player)
+					Nekoyoubi.sendMessage(target, god.colorName()+" has healed your wounds.");
+				else
+					Nekoyoubi.sendMessage(target, player.getDisplayName()+" has asked "+god.colorName()+" to heal your wounds.");
+			}
 		} else if (action == "feed") {
 			for (Player target : effectTargets) {
-				target.setFoodLevel(100);
+				target.setFoodLevel(Integer.parseInt(this.data));
+				if (target == player)
+					Nekoyoubi.sendMessage(target, god.colorName()+" has soothed your hunger.");
+				else
+					Nekoyoubi.sendMessage(target, player.getDisplayName()+" has asked "+god.colorName()+" to soothe your hunger.");
+			}			
+		} else if (action == "hunger") {
+			for (Player target : effectTargets) {
+				target.setFoodLevel(Integer.parseInt(this.data));
+				if (target == player)
+					Nekoyoubi.sendMessage(target, god.colorName()+" was not amused. Feast on your own famine.");
+				else
+					Nekoyoubi.sendMessage(target, player.getDisplayName()+" has angered "+god.colorName()+".");
 			}			
 		} else if (action == "hurt") {
-			
+			for (Player target : effectTargets) {
+				target.damage(Integer.parseInt(this.data), player);
+				if (target == player)
+					Nekoyoubi.sendMessage(target, god.colorName()+" was not amused. Your life was forfeit.");
+				else
+					Nekoyoubi.sendMessage(target, player.getDisplayName()+" has brought the wrath of "+god.colorName()+" upon you.");
+			}
 		} else if (action == "burn") {
-			
-		} else if (action == "ill") {
-			
+			for (Player target : effectTargets) {
+				target.setFireTicks(Integer.parseInt(this.data)*20);
+				if (target == player)
+					Nekoyoubi.sendMessage(target, god.colorName()+" was not amused. Enjoy your rewards.");
+				else
+					Nekoyoubi.sendMessage(target, player.getDisplayName()+" has brought the flames of "+god.colorName()+" upon you.");
+			}
+		} else if (action == "dig") {
+			for (Player target : effectTargets) {
+				Location tloc = target.getLocation();
+				for (int u = 0; u < 3; u++) {
+					Block under = tloc.getBlock().getRelative(0, -(u+1), 0);
+					if (	under.getType() != Material.AIR &&
+							under.getType() != Material.BEDROCK)
+						under.setType(Material.AIR);
+				}
+					if (target == player)
+						Nekoyoubi.sendMessage(target, god.colorName()+" was not amused. To the underworld with you!");
+					else
+						Nekoyoubi.sendMessage(target, player.getDisplayName()+" has convinced "+god.colorName()+" to send you to the underworld.");
+			}
 		} else if (action == "stormy") {
-			
+			if (player.getWorld().getWeatherDuration() == 0) {
+				player.getWorld().setStorm(true);
+				for (Player target : effectTargets) {
+					if (target == player)
+						Nekoyoubi.sendMessage(target, god.colorName()+" was not amused. The skys rumble and riot above you.");
+					else
+						Nekoyoubi.sendMessage(target, player.getDisplayName()+" has brought the tempests of "+god.colorName()+" upon you.");
+				}
+			}
 		} else if (action == "sunny") {
-			
+			if (player.getWorld().getWeatherDuration() > 0) {
+				player.getWorld().setStorm(false);
+				for (Player target : effectTargets) {
+					if (target == player)
+						Nekoyoubi.sendMessage(target, god.colorName()+" has lifted the clouds in your honor.");
+					else
+						Nekoyoubi.sendMessage(target, player.getDisplayName()+" has asked "+god.colorName()+" to bring out the sun.");
+				}
+			}
 		} else if (action == "shock") {
-			
+			for (Player target : effectTargets) {
+				player.getWorld().strikeLightning(target.getLocation());
+				if (target == player)
+					Nekoyoubi.sendMessage(target, god.colorName()+" was not amused. Cower in the might of "+god.colorName()+"!");
+				else
+					Nekoyoubi.sendMessage(target, player.getDisplayName()+" has brought the wrath of "+god.colorName()+" upon you.");
+			}
+		} else if (action == "weaken") {
+			for (Player target : effectTargets) {
+				PlayerInventory inv = target.getInventory();
+				HashMap<Integer,ItemStack> map = new HashMap<Integer, ItemStack>();
+				map.putAll(inv.all(Material.IRON_HELMET));
+				map.putAll(inv.all(Material.IRON_CHESTPLATE));
+				map.putAll(inv.all(Material.IRON_LEGGINGS));
+				map.putAll(inv.all(Material.IRON_BOOTS));
+				map.putAll(inv.all(Material.DIAMOND_HELMET));
+				map.putAll(inv.all(Material.DIAMOND_CHESTPLATE));
+				map.putAll(inv.all(Material.DIAMOND_LEGGINGS));
+				map.putAll(inv.all(Material.DIAMOND_BOOTS));
+				Nekoyoubi.sendMessage(target, map.size()+"");
+				
+				Random rando = new Random();
+				Object[] values = map.values().toArray();
+				ItemStack item = (ItemStack)values[rando.nextInt(values.length)];
+				Nekoyoubi.sendMessage(target, "Before: "+item.getDurability());
+				item.setDurability((short)(item.getDurability()/(short)2));
+				Nekoyoubi.sendMessage(target, "After: "+item.getDurability());
+				target.updateInventory();
+				if (target == player)
+					Nekoyoubi.sendMessage(target, god.colorName()+" was not amused. Your armor was your aegis.");
+				else
+					Nekoyoubi.sendMessage(target, player.getDisplayName()+" has brought the wrath of "+god.colorName()+" upon you.");
+			}
 		}
 	}
 	

@@ -13,6 +13,7 @@ public abstract class God {
 	public String displayName;
 	public List<Material> shrineBases;
 	public List<Favor> favors;
+	public List<Favor> curses;
 	protected String msgGiven;
 	protected String msgDisappoint;
 	protected String msgNull;
@@ -25,19 +26,33 @@ public abstract class God {
 			Random rando = new Random();
 			for (Favor favor : this.favors) {
 				int test = rando.nextInt(1000)+1;
-				int modchance = favor.chance * (level*((level/2)+1));
+				double modchance = (double)favor.chance * ((double)level*(((double)level/2.0)));
 				//Nekoyoubi.sendMessage(player, favor.action+" "+favor.data+" / ("+favor.chance+"*"+level+" = "+modchance+") > "+test);
 				if (test < modchance) {
-					favor.process(player, shrine);
+					favor.process(player, shrine, this);
 				}
-				
 			}
 			player.setLevel(0);
 			player.setExperience(0);
 			player.setTotalExperience(0);
-			Nekoyoubi.sendMessage(player, (level < 3) ? msgDisappoint : msgGiven);
+			Nekoyoubi.sendMessage(player, (level < 4) ? msgDisappoint : msgGiven);
+			if (level < 4) {
+				boolean cursed = false;
+				for (Favor curse : this.curses) {
+					if (!cursed && rando.nextInt(1000)+1 < curse.chance) {
+						curse.process(player, shrine, this);
+						cursed = true;
+					}
+				}
+			}
 		} else {
 			Nekoyoubi.sendMessage(player, msgNull);
 		}
 	}
+	
+	public void newShrine(Player player, Block shrine) {
+		Nekoyoubi.sendMessage(player, "You have placed a new "+colorCode+"Shrine of "+displayName+"&f.", false);
+		Nekoyoubi.sendMessage(player, "Right-click the shrine to pay homage to "+colorName(), true);
+	}
+
 }

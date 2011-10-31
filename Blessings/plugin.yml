@@ -1,3 +1,8 @@
 name: Blessings
 main: me.Nekoyoubi.Blessings.Blessings
 version: 0.1
+commands:
+    faith:
+        description: Displays the user's current level.
+        usage: /<command>
+        aliases: xp

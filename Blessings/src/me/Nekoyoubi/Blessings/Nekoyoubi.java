@@ -8,11 +8,17 @@ import org.bukkit.entity.Player;
 
 public class Nekoyoubi {
     private static String chatStart = ChatColor.GOLD + "Blessings" + ChatColor.WHITE + ": ";
-    public static void sendMessage(Player player, String message){
-        player.sendMessage(chatStart+message
+    
+    public static void sendMessage(Player player, String message) {
+        Nekoyoubi.sendMessage(player, message, false);
+    }
+	public static void sendMessage(Player player, String message, boolean nextline) {
+		player.sendMessage(
+				(nextline ? "             " : chatStart) +
+				message
         		.replaceAll("(&([a-f0-9]))", "\u00A7$2")
         		.replaceAll("%WORLD%", titleCase(player.getWorld().getName())));
-    }
+	}
 	public static Player randomPlayerInWorld(World world) {
 		if (world.getPlayers().size() > 0) {
 			return world.getPlayers().get(new Random().nextInt(world.getPlayers().size()));
