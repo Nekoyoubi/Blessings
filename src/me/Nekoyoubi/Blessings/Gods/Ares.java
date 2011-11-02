@@ -34,6 +34,7 @@ public class Ares extends God {
 		favors.add(new Favor(10, "give", "player", "279", "")); // A diamond axe.
 		favors.add(new Favor(10, "give", "player", "276", "")); // A diamond sword.
 		favors.add(new Favor(10, "spawn", "player", "dogofwar", "")); // A tamed wolf.
+		Collections.reverse(favors);
 		
 		curses = new ArrayList<Favor>();	
 		curses.add(new Favor(500, "burn", "player", "3", "")); // Burns the player for three seconds.

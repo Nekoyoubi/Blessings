@@ -46,6 +46,7 @@ public class Hades extends God {
 		favors.add(new Favor(20, "give", "player", "347", "")); // A watch.
 		favors.add(new Favor(20, "give", "player", "65x64", "")); // A stack (64) of ladders.
 		favors.add(new Favor(10, "give", "player", "57", "")); // A diamond pickaxe.
+		Collections.reverse(favors);
 		
 		curses = new ArrayList<Favor>();	
 		curses.add(new Favor(100, "dig", "random", "3", "")); // Drops a random player down three blocks in the ground.

@@ -41,6 +41,7 @@ public class Zeus extends God {
 		favors.add(new Favor(20, "give", "player", "347", "")); // A watch.
 		favors.add(new Favor(20, "give", "player", "66x64", "")); // A stack (64) of minecart rails.
 		favors.add(new Favor(5, "give", "player", "57", "")); // A diamond block.
+		Collections.reverse(favors);
 		
 		curses = new ArrayList<Favor>();	
 		curses.add(new Favor(250, "shock", "random", "", "")); // Strikes a random player with lightening.

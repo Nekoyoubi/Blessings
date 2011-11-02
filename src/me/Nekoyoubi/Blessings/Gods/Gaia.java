@@ -48,6 +48,7 @@ public class Gaia extends God {
 		favors.add(new Favor(20, "give", "player", "103x3", "")); // Three melons.
 		favors.add(new Favor(15, "give", "player", "293", "")); // A diamond hoe.
 		favors.add(new Favor(10, "give", "player", "277", "")); // A diamond shovel.
+		Collections.reverse(favors);
 		
 		curses = new ArrayList<Favor>();	
 		curses.add(new Favor(100, "hunger", "player", "1", "")); // Hungers the player.

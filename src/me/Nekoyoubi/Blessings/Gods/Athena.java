@@ -39,6 +39,7 @@ public class Athena extends God {
 		favors.add(new Favor(10, "give", "player", "311", "")); // A diamond chest.
 		favors.add(new Favor(10, "give", "player", "312", "")); // A pair of diamond pants.
 		favors.add(new Favor(10, "give", "player", "313", "")); // A pair of diamond boots.
+		Collections.reverse(favors);
 		
 		curses = new ArrayList<Favor>();	
 		curses.add(new Favor(0, "weaken", "player", "50", "")); // Weakens a random item from the player's inventory by 50%.
