@@ -131,7 +131,6 @@ gods:
       anger: '%GOD% curses your few remaining days.'
       ignore: Disturbing %GOD% now could only end badly.
     blessings:
-    - 1@500 give player 295x8-64;295x8-64;6r0-10;6:1r0-10;6:2r0-10
     - 2@250 give player;random 351:0r1-10
     - 2@250 give player;random 351:8r1-10
     - 3@500 give player 352x1-32
