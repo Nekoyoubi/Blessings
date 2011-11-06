@@ -1,5 +1,8 @@
 package me.Nekoyoubi.Blessings;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 import java.util.Random;
 
 import org.bukkit.ChatColor;
@@ -13,11 +16,19 @@ public class Nekoyoubi {
         Nekoyoubi.sendMessage(player, message, false);
     }
 	public static void sendMessage(Player player, String message, boolean nextline) {
-		player.sendMessage(
-				(nextline ? "             " : chatStart) +
-				message
-        		.replaceAll("(&([a-f0-9]))", "\u00A7$2")
-        		.replaceAll("%WORLD%", titleCase(player.getWorld().getName())));
+		if (nextline) {
+			if (message.startsWith("<"))
+				message = message.substring(1);
+			else {
+				message = "             "+message;
+			}
+		}
+		else {
+			message = chatStart+message;
+		}
+		player.sendMessage(message
+        	.replaceAll("(&([a-f0-9]))", "\u00A7$2")
+        	.replaceAll("%WORLD%", titleCase(player.getWorld().getName())));
 	}
 	public static Player randomPlayerInWorld(World world) {
 		if (world.getPlayers().size() > 0) {
@@ -35,4 +46,12 @@ public class Nekoyoubi {
         }
         return result;
     }
+	
+	public static <T> List<T> castList(Class<? extends T> clazz, Collection<?> c) {
+	    List<T> r = new ArrayList<T>(c.size());
+	    for(Object o: c)
+	      r.add(clazz.cast(o));
+	    return r;
+	}
+
 }

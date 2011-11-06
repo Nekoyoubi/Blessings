@@ -8,35 +8,51 @@ import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 
-public abstract class God {
+public class God {
 	public String colorCode;
 	public String displayName;
+	public String description;
 	public List<Material> shrineBases;
 	public List<Favor> favors;
 	public List<Favor> curses;
-	protected String msgGiven;
-	protected String msgDisappoint;
-	protected String msgNull;
-	//private String msgSharePlayer;
-	//private String msgShareWorld;
+	protected String msgPlease;
+	protected String msgAnger;
+	protected String msgIgnore;
+	public Integer ignoresBelow;
+	public Integer angersBelow;
 	public String colorName() { return colorCode + displayName + "&f"; }
 	public void offer(Player player, Block shrine) {
 		int level = player.getLevel();
-		if (level > 0) {
+		if (level > ignoresBelow) {
 			Random rando = new Random();
-			for (Favor favor : this.favors) {
+			boolean blessed = false;
+			do {
+				Favor favor = favors.get(rando.nextInt(favors.size()));
 				int test = rando.nextInt(1000)+1;
-				double modchance = (double)favor.chance * ((double)level*(((double)level/2.0)));
-				//Nekoyoubi.sendMessage(player, favor.action+" "+favor.data+" / ("+favor.chance+"*"+level+" = "+modchance+") > "+test);
-				if (test < modchance) {
+				double modlevel = (Math.abs(level-favor.level)*0.05)+1;
+				if (((double)test*modlevel) < favor.chance) {
 					favor.process(player, shrine, this);
-				}
+					blessed = true;
+				}				
+			} while (!blessed);
+
+			// Whoa, buddy.
+			if (level>100) {
+				player.setLevel(0);
+				player.setExperience(0);
+				player.setTotalExperience(0);
 			}
-			player.setLevel(0);
-			player.setExperience(0);
+			
+			int newLevel = (level > 20 ? 19 : level-1);
 			player.setTotalExperience(0);
-			Nekoyoubi.sendMessage(player, (level < 4) ? msgDisappoint : msgGiven);
-			if (level < 4) {
+			player.setExperience(0);
+			player.setLevel(newLevel);
+			
+			Nekoyoubi.sendMessage(player, "You are left with &6"+player.getLevel()+
+					(player.getLevel()==1?"&f level ":"&f levels ")+
+					"of faith.");
+			if (level < angersBelow) {
+				Nekoyoubi.sendMessage(player, untoken(msgAnger));
 				boolean cursed = false;
 				for (Favor curse : this.curses) {
 					if (!cursed && rando.nextInt(1000)+1 < curse.chance) {
@@ -46,8 +62,14 @@ public abstract class God {
 				}
 			}
 		} else {
-			Nekoyoubi.sendMessage(player, msgNull);
+			Nekoyoubi.sendMessage(player, untoken(msgIgnore));
 		}
+	}
+	
+	private String untoken(String message) {
+		return message
+				.replace("%GOD%", colorName())
+				.replace("%GODNAME%", displayName);
 	}
 	
 	public void newShrine(Player player, Block shrine) {
