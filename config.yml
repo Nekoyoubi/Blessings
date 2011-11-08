@@ -88,7 +88,7 @@ gods:
       anger: '%GOD% frowns upon your apathy.'
       ignore: You would be unhear by %GOD% with this faith.
     blessings:
-    - 1@500 give player 295x8-64;295x8-64;6r0-10;6:1r0-10;6:2r0-10
+    - 1@500 give player;random 295x8-64;295x8-64;6r0-10;6:1r0-10;6:2r0-10
     - 2@250 give player;random 351:2r1-10
     - 2@250 give player;random 351:3r1-10
     - 2@250 give player;random 351:10r1-10
@@ -202,7 +202,7 @@ gods:
     ignoresBelow: 1
     angersBelow: 2
   zeus:
-    name: Zues
+    name: Zeus
     color: '&d'
     description: God of sky and thunder.
     messages:

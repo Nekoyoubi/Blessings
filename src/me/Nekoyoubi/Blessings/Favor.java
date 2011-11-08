@@ -94,7 +94,7 @@ public class Favor {
 						target.getInventory().addItem(itemStack);
 						target.updateInventory();
 					}
-					Nekoyoubi.sendMessage(player, god.colorName()+" has given you "+
+					Nekoyoubi.sendMessage(target, god.colorName()+" has given you "+
 							itemStack.getAmount()+" "+
 							Nekoyoubi.titleCase(itemStack.getType().toString().replace("_"," ")).replace("Tnt", "TNT")+".");
 				}
@@ -237,15 +237,15 @@ public class Favor {
 				map.putAll(inv.all(Material.DIAMOND_CHESTPLATE));
 				map.putAll(inv.all(Material.DIAMOND_LEGGINGS));
 				map.putAll(inv.all(Material.DIAMOND_BOOTS));
-				Nekoyoubi.sendMessage(target, map.size()+"");
+				//Nekoyoubi.sendMessage(target, map.size()+"");
 				
 				Random rando = new Random();
 				Object[] values = map.values().toArray();
-				ItemStack item = (ItemStack)values[rando.nextInt(values.length)];
-				Nekoyoubi.sendMessage(target, "Before: "+item.getDurability());
-				item.setDurability((short)(item.getDurability()/(short)2));
-				Nekoyoubi.sendMessage(target, "After: "+item.getDurability());
-				target.updateInventory();
+				//ItemStack item = (ItemStack)values[rando.nextInt(values.length)];
+				//Nekoyoubi.sendMessage(target, "Before: "+item.getDurability());
+				//item.setDurability((short)(item.getDurability()/(short)2));
+				//Nekoyoubi.sendMessage(target, "After: "+item.getDurability());
+				//target.updateInventory();
 				if (target == player)
 					Nekoyoubi.sendMessage(target, god.colorName()+" was not amused. Your armor was your aegis.");
 				else
