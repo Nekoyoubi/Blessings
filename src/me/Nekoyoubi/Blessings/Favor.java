@@ -239,8 +239,8 @@ public class Favor {
 				map.putAll(inv.all(Material.DIAMOND_BOOTS));
 				//Nekoyoubi.sendMessage(target, map.size()+"");
 				
-				Random rando = new Random();
-				Object[] values = map.values().toArray();
+				//Random rando = new Random();
+				//Object[] values = map.values().toArray();
 				//ItemStack item = (ItemStack)values[rando.nextInt(values.length)];
 				//Nekoyoubi.sendMessage(target, "Before: "+item.getDurability());
 				//item.setDurability((short)(item.getDurability()/(short)2));
